@@ -46,4 +46,5 @@ result = numeroDeDias(ar)
 print("Número de dias até que as plantas parem de morrer:")
 print(result)
 
-print("Testando comunicacao remota. Duan.")
+print("Testando comunicacao remota 2. Duan.")
+
