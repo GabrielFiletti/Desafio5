@@ -1,3 +1,7 @@
+from opencage.geocoder import OpenCageGeocode
+from ipyleaflet import *
+from pprint import pprint
+
 class Biodiversidade_csv:
     def __init__(self, arquivo):
         self.arquivo = list(open(arquivo))
@@ -75,12 +79,12 @@ class Biodiversidade_csv:
             24- Localidade
             25- Pais
             26- Estado/Provincia
-            27- Municipio
-            28- Status de Sensibilidade
+            27- Municipiofrom pprint import pprint
+            28- Status defrom pprint import pprint
             29- Latitude
-            30- Longitude
-            31- Outras informacoes da localidade
-            32- Jurisdicao
+            30- Longitudefrom pprint import pprint
+            31- Outras infrom pprint import pprint
+            32- Jurisdicafrom pprint import pprint
             33- Destino do Material
 
             Exemplo de uso: 
@@ -98,9 +102,41 @@ class Biodiversidade_csv:
         else:       
             print("Numero de ocorrencias do filtro:",len(self.ocorrencia))
         return self.ocorrencia
+    
+    def mapa(self):
+        self.latLong = []       # Lista de listas: cada sublista esta no formato [lat,long]
+        [self.latLong.append([i.split(";")[29],i.split(";")[30]]) for i in self.arquivo[1:]]
         
+        key = 'b3581bc610a644f896bd87fc2cd8e6ce'
+        geocoder = OpenCageGeocode(key)
+
+        #center = (-23.3245302,-51.1692355)  #coordenadas
+        results = geocoder.reverse_geocode(self.latLong[32][0], self.latLong[32][1])
+        pprint(results)
+
+        #print(len(self.latLong))
+
+        #[self.latLong.append([self.arquivo[i][29],self.arquivo[i+1][30]]) for i in range(0,len(self.arquivo[1:]))]
+        
+        #print(self.latLong)
+        '''
+        key = "b3581bc610a644f896bd87fc2cd8e6ce"
+        geocoder = OpenCageGeocode(key)
+
+        center = (-23.3245302,-51.1692355)  #coordenadas
+        map = Map(center=center, zoom = 6)  # centraliza
+        marker = Marker(location=center, draggable=False)
+        marker2 = Marker(location=(-23.4,-51.2), draggable=False)
+        map.add_layer(marker)
+        map.add_layer(marker2)
+        map
+        pass
+        '''
+
+
         
 obj = Biodiversidade_csv("portalbio_export_17-10-2019-13-06-22.csv")
 #obj.qtdLinhasDadosFaltantes()
 #obj.nivelTax()
 #obj.filtro_ocorrencias(1,"JBRJ")                   #OK
+obj.mapa()
