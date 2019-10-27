@@ -107,12 +107,22 @@ class Biodiversidade_csv:
         self.latLong = []       # Lista de listas: cada sublista esta no formato [lat,long]
         [self.latLong.append([i.split(";")[29],i.split(";")[30]]) for i in self.arquivo[1:]]
         
+        
         key = 'b3581bc610a644f896bd87fc2cd8e6ce'
         geocoder = OpenCageGeocode(key)
 
         #center = (-23.3245302,-51.1692355)  #coordenadas
         results = geocoder.reverse_geocode(self.latLong[32][0], self.latLong[32][1])
         pprint(results)
+        
+        """ BLIND TRY
+        for i in self.latLong:
+            if (cidade no arquivo [iteracao i] == cidade no geocoder[iteracao i]):
+                return True
+            else:
+                return False
+        """
+
 
         #print(len(self.latLong))
 
