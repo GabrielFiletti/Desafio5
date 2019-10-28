@@ -117,17 +117,11 @@ class Biodiversidade_csv:
     
     def checkLatLong(self):
         self.latLong = []       # Lista de listas: cada sublista esta no formato [lat,long]
-<<<<<<< HEAD
         self.city = []          # Lista de cidades 
         self.indexNotOK = []
         [self.latLong.append([i.split(";")[29],i.split(";")[30]]) for i in self.arquivo[1:60]]
         [self.city.append(i.split(";")[27]) for i in self.arquivo[1:60]]
 
-=======
-        [self.latLong.append([i.split(";")[29],i.split(";")[30]]) for i in self.arquivo[1:]]
-        
-        
->>>>>>> bec38997170fcd30f54e09a7ab6da2228957d85d
         key = 'b3581bc610a644f896bd87fc2cd8e6ce'
         geocoder = OpenCageGeocode(key)
         
@@ -137,40 +131,8 @@ class Biodiversidade_csv:
                 #self.notOK.append([["City from geocoder: "+results[0]['components']['city']],["City from csv-file: "+self.city[i]],["Index: "+str(i)]])
                 self.indexNotOK.append(i)
 
-<<<<<<< HEAD
-        print("Indices dos dados conflitantes:",self.indexNotOK)        
-=======
-        #center = (-23.3245302,-51.1692355)  #coordenadas
-        results = geocoder.reverse_geocode(self.latLong[32][0], self.latLong[32][1])
-        pprint(results)
-        
-        """ BLIND TRY
-        for i in self.latLong:
-            if (cidade no arquivo [iteracao i] == cidade no geocoder[iteracao i]):
-                return True
-            else:
-                return False
-        """
-
-
-        #print(len(self.latLong))
->>>>>>> bec38997170fcd30f54e09a7ab6da2228957d85d
-
-        '''
-        key = "b3581bc610a644f896bd87fc2cd8e6ce"
-        geocoder = OpenCageGeocode(key)
-
-        center = (-23.3245302,-51.1692355)  #coordenadas
-        map = Map(center=center, zoom = 6)  # centraliza
-        marker = Marker(location=center, draggable=False)
-        marker2 = Marker(location=(-23.4,-51.2), draggable=False)
-        map.add_layer(marker)
-        map.add_layer(marker2)
-        map
-        pass
-        '''
-
-
+        print("Indices dos dados conflitantes:",self.indexNotOK)
+        return self.indexNotOK
         
 obj = Biodiversidade_csv("portalbio_export_17-10-2019-13-06-22.csv")
 #obj.qtdLinhasDadosFaltantes()                      #OK
